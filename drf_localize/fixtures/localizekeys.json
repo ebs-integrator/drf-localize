@@ -1,0 +1,87 @@
+[
+  {
+    "model": "drf_localize.localizekey",
+    "pk": 1,
+    "fields": {
+      "application": null,
+      "code": "Welcome",
+      "i18n": {
+        "en": "Welcome",
+        "ro": "Bine aţi venit",
+        "ru": "Добро пожаловать"
+      },
+      "type": "PLAIN"
+    }
+  },
+  {
+    "model": "drf_localize.localizekey",
+    "pk": 2,
+    "fields": {
+      "application": null,
+      "code": "Localization",
+      "i18n": {
+        "en": "Localization",
+        "ro": "Localizare",
+        "ru": "Локализация"
+      },
+      "type": "PLAIN"
+    }
+  },
+  {
+    "model": "drf_localize.localizekey",
+    "pk": 3,
+    "fields": {
+      "application": null,
+      "code": "Aplication domain",
+      "i18n": {
+        "en": "Aplication domain",
+        "ro": "Domeniul de aplicare",
+        "ru": "Домен приложения"
+      },
+      "type": "PLAIN"
+    }
+  },
+  {
+    "model": "drf_localize.localizekey",
+    "pk": 4,
+    "fields": {
+      "application": null,
+      "code": "common",
+      "i18n": {
+        "en": {
+          "Hello": "Hello",
+          "Local": "Local"
+        },
+        "ro": {
+          "Hello": "Bună ziua",
+          "Local": "Local"
+        },
+        "ru": {
+          "Hello": "Привет",
+          "Local": "Местный"
+        }
+      },
+      "type": "NAMESPACE"
+    }
+  },
+  {
+    "model": "drf_localize.localizekey",
+    "pk": 5,
+    "fields": {
+      "application": null,
+      "code": "order",
+      "i18n": {
+        "en": {
+          "Order": "Order"
+        },
+        "ro": {
+          "Order": "Ordin"
+        },
+        "ru": {
+          "Order": "Заказ"
+        }
+      },
+      "type": "NAMESPACE"
+    }
+  }
+]
