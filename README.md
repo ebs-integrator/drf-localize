@@ -85,6 +85,9 @@ class Blog(models.Model):  # noqa
 
     # DRF Localize model specific constant, which is used to store translations (json)
     LOCALIZE_FIELD = 'i18n'
+    
+    # DRF Localize model specific constant, which is used to auto-update or remove translations for languages
+    LOCALIZE_AUTO_UPDATE = False # not required , defaults to False
 
     # Your custom model fields
     title = models.CharField(max_length=254, null=True)

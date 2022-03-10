@@ -84,5 +84,5 @@ REST_FRAMEWORK = {
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DRF_LOCALIZE = {
-    'LANGUAGES': ['en', 'ru', 'ro', 'pt', 'bg'],
+    'LANGUAGES': ['en', 'ro', 'bg'],
 }

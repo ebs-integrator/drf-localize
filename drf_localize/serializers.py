@@ -32,7 +32,7 @@ class I18N(Serializer):
         self.context = kwargs.pop('context', None)
         self.localize_namespace = kwargs.pop('namespace', False)
         self.localize_translate, self.localize_field, self.localize_auto_update = localize._model_set(model=self.localize_model)  # noqa
-        localize._signal(model=self.localize_model)
+        localize._signal(model=self.localize_model)  # noqa
         super(I18N, self).__init__(**kwargs)
 
     def to_representation(self, instance):

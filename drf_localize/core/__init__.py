@@ -7,12 +7,6 @@ from typing import Union
 from django.db.models.base import ModelBase
 from contextlib import suppress
 from zipfile import ZipFile
-from django.db.models import (
-    F,
-    Func,
-    Value,
-    JSONField
-)
 
 # Import your package here.
 
@@ -451,28 +445,48 @@ class Localize:
 
         translate, field, auto_update = self._model_set(model=model)
 
-        if not auto_update:
+        if not all([translate, field, auto_update]):
             return self
 
         languages = self.get_languages()
+        objects = []
+        queryset = model.objects.all()
 
-        x = model.objects.values_list(field, 'id')
-        for i18n, _id in x:
-            keys = list(i18n.keys())
-            difference = list(set(languages).difference(keys))
+        for element in queryset:
+            i18n = getattr(element, field, None)
 
-            if not difference:
+            if not i18n:
                 continue
 
-            payload = {}
-            for language in difference:
-                payload.update({language: {}})
+            keys = list(i18n.keys())
+            difference_to_update = list(set(languages).difference(keys))
+            difference_to_delete = list(set(keys).difference(languages))
+
+            if not difference_to_update and not difference_to_delete:
+                continue
+
+            for language in difference_to_delete:
+                i18n.pop(language, None)
+
+            for language in difference_to_update:
+                i18n.update({language: {}})
 
                 for translate_field in translate:
-                    payload[language].update({translate_field: ''})
+                    i18n[language].update({translate_field: ''})
 
-            i18n.update(**payload)
-            model.objects.filter(id=_id).update(**{field: i18n})
+            # Set updatable field
+            setattr(element, field, i18n)
+            objects.append(element)
+
+        # Bulk update model objects
+        if length := len(objects):
+            model.objects.bulk_update(
+                objs=objects,
+                fields=[
+                    field,
+                ],
+                batch_size=length,
+            )
 
 
 # Export localize instance
