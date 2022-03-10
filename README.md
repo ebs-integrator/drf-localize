@@ -133,10 +133,22 @@ class BlogViewSet(ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView, Gene
 
 ### Standalone mode
 
+If you are planning to use `drf_localize`'s REST API endpoints add package urls in your project.
+
+```python
+from django.urls import (include, path, )
+
+urlpatterns = [
+    ...,
+    path('drf_localize', include('drf_localize.urls', namespace='localize')),
+    ...,
+]
+```
+
 ### Create localize key
 
 ```http
-POST /localize/keys
+POST /drf_localize/localize/keys
 ```
 
 | Parameter | Type     | Description            |
@@ -158,7 +170,7 @@ POST /localize/keys
 #### Update localize key
 
 ```http
-PATCH /localize/keys/:id
+PATCH /drf_localize/localize/keys/:id
 ```
 
 | Parameter | Type     | Description         |
@@ -180,7 +192,7 @@ PATCH /localize/keys/:id
 ### Create localize namespace key
 
 ```http
-POST /localize/keys
+POST /drf_localize/localize/keys
 ```
 
 | Parameter | Type     | Description            |
@@ -210,7 +222,7 @@ POST /localize/keys
 #### Update localize namespace key
 
 ```http
-PATCH /localize/keys/:id
+PATCH /drf_localize/localize/keys/:id
 ```
 
 | Parameter | Type     | Description         |
@@ -240,13 +252,13 @@ PATCH /localize/keys/:id
 #### Retrieve localize namespace keys
 
 ```http
-GET /localize/keys?search=NAMESPACE
+GET /drf_localize/localize/keys?search=NAMESPACE
 ```
 
 #### Download platform specific localize key file
 
 ```http
-GET /localize/keys/:platform/:language/file
+GET /drf_localize/localize/keys/:platform/:language/file
 ```
 
 | Parameter   | Type     | Description                                 |
@@ -257,7 +269,7 @@ GET /localize/keys/:platform/:language/file
 #### Download platform specific localize keys zip file
 
 ```http
-GET /localize/keys/:platform/zip
+GET /drf_localize/localize/keys/:platform/zip
 ```
 
 | Parameter   | Type     | Description                                 |
@@ -267,7 +279,7 @@ GET /localize/keys/:platform/zip
 #### Download all platform specific localize keys in a single zip file
 
 ```http
-GET /localize/keys/zip
+GET /drf_localize/localize/keys/zip
 ```
 
 ### Service mode
@@ -293,7 +305,7 @@ then add `X-API-Key` header in standalone mode endpoints:
 ### Create application
 
 ```http
-POST /localize/applications
+POST /drf_localize/localize/applications
 ```
 
 | Parameter | Type     | Description         |
@@ -304,7 +316,7 @@ POST /localize/applications
 #### Retrieve application
 
 ```http
-GET /localize/application
+GET /drf_localize/localize/application
 ```
 
 | Header         | Type    | Description                        |
@@ -314,7 +326,7 @@ GET /localize/application
 #### Attach application languages
 
 ```http
-POST /localize/application/languages
+POST /drf_localize/localize/application/languages
 ```
 
 | Parameter | Type     | Description   |
@@ -337,7 +349,7 @@ POST /localize/application/languages
 #### Detach application languages
 
 ```http
-DELETE /localize/application/languages
+DELETE /drf_localize/localize/application/languages
 ```
 
 | Parameter | Type     | Description   |
@@ -359,7 +371,7 @@ DELETE /localize/application/languages
 #### Retrieve application languages
 
 ```http
-GET /localize/application/languages
+GET /drf_localize/localize/application/languages
 ```
 
 | Header         | Type    | Description                        |

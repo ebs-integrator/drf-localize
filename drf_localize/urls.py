@@ -14,6 +14,8 @@ from drf_localize.applications.views import (
 
 # Create your patterns here.
 
+app_name = 'localize'  # noqa
+
 router = routers.SimpleRouter(trailing_slash=False)
 
 # Localize applications
