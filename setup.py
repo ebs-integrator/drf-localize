@@ -6,9 +6,9 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 
 setup(
     name="drf-localize",
-    version="0.0.1",
+    version="0.1.1",
     author="Dorin Musteața",
-    description="drf-localize is a package that provides mobile and API clients with localization experiences.",
+    description="Package to provide localization experiences for mobile and api applications.",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/ebs-integrator/drf-localize",

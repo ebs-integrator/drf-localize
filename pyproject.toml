@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "drf-localize"
-version = "0.1.0"
-description = "Localization Experience"
+version = "0.1.1"
+description = "Package to provide localization experiences for mobile and api applications."
 authors = ["Dorin Musteața"]
 readme = "README.md"
 license = "MIT"
