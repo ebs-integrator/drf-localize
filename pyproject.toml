@@ -1,8 +1,10 @@
 [tool.poetry]
 name = "drf-localize"
-version = "0.0.1"
+version = "0.1.0"
 description = "Localization Experience"
 authors = ["Dorin Musteața"]
+readme = "README.md"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = ">=3.7 <=3.10"
