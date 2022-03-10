@@ -47,7 +47,7 @@ python manage.py loaddata localizekeys (optional)
 Configuration for **DRF Localize** is namespaced in a single django setting, named `DRF_LOCALIZE`, by default everything is configured out of the box.
 
 ```python
-DRF_AUTH_SERVICE = {
+DRF_LOCALIZE = {
     'LANGUAGES': 'ALL',  # noqa
     'BASE_DIR': BASE_DIR,  # noqa
     'API_KEY_HEADER_NAME': 'HTTP_X_API_KEY',
