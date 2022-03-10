@@ -137,7 +137,8 @@ class Localize:
             # Ignore any exception from invalid model
             with suppress(Exception):
                 localize_languages = list(
-                    model.objects.values_list(field, flat=True))  # noqa
+                    model.objects.values_list(field, flat=True)
+                )
 
         # Application languages has higher priority
         service_languages = settings.LANGUAGES
@@ -423,6 +424,49 @@ class Localize:
                 getattr(key, f'set_{language}')(value)
 
         return self
+
+    @staticmethod
+    def _model_set(model=None):
+        if not model or not issubclass(type(model), ModelBase):
+            return [], None, None
+
+        translate = getattr(model, 'LOCALIZE_TRANSLATE', [])
+        field = getattr(model, 'LOCALIZE_FIELD', None)
+        auto_update = getattr(model, 'LOCALIZE_AUTO_UPDATE', False)
+
+        if not isinstance(auto_update, bool):
+            auto_update = False
+
+        return translate, field, auto_update
+
+    def _signal(self, model=None):
+        if not model or not issubclass(type(model), ModelBase):
+            return self
+
+        translate, field, auto_update = self._model_set(model=model)
+
+        if not auto_update:
+            return self
+
+        languages = self.get_languages()
+
+        x = model.objects.values_list(field, 'id')
+        for i18n, _id in x:
+            keys = list(i18n.keys())
+            difference = list(set(languages).difference(keys))
+
+            if not difference:
+                continue
+
+            payload = {}
+            for language in difference:
+                payload.update({language: {}})
+
+                for field in translate:
+                    payload[language].update({field: ''})
+
+            print(payload, i18n)
+        # for language in languages:
 
 
 # Export localize instance

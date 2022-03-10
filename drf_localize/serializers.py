@@ -12,7 +12,6 @@ from django.utils.functional import cached_property
 
 # Import your package here.
 
-from drf_localize.settings import settings
 from drf_localize.core import (
     localize,
     localize_key_type
@@ -32,8 +31,8 @@ class I18N(Serializer):
         self.localize_model = kwargs.pop('model', None)
         self.context = kwargs.pop('context', None)
         self.localize_namespace = kwargs.pop('namespace', False)
-        self.localize_translate = getattr(self.localize_model, 'LOCALIZE_TRANSLATE', [])
-        self.localize_field = getattr(self.localize_model, 'LOCALIZE_FIELD', None)
+        self.localize_translate, self.localize_field, self.localize_auto_update = localize._model_set(model=self.localize_model)  # noqa
+        localize._signal(model=self.localize_model)
         super(I18N, self).__init__(**kwargs)
 
     def to_representation(self, instance):
