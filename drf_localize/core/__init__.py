@@ -7,6 +7,12 @@ from typing import Union
 from django.db.models.base import ModelBase
 from contextlib import suppress
 from zipfile import ZipFile
+from django.db.models import (
+    F,
+    Func,
+    Value,
+    JSONField
+)
 
 # Import your package here.
 
@@ -462,11 +468,11 @@ class Localize:
             for language in difference:
                 payload.update({language: {}})
 
-                for field in translate:
-                    payload[language].update({field: ''})
+                for translate_field in translate:
+                    payload[language].update({translate_field: ''})
 
-            print(payload, i18n)
-        # for language in languages:
+            i18n.update(**payload)
+            model.objects.filter(id=_id).update(**{field: i18n})
 
 
 # Export localize instance
