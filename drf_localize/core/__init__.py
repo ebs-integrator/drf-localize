@@ -105,14 +105,15 @@ class Localize:
         for language in self.languages():
             setattr(Localize, f'set_{language}', make_method(code=language))
 
-    def languages(self, source: str = 'drf_localize/fixtures/localizelanguages.json') -> list:
+    def languages(self, source: str = '../fixtures/localizelanguages.json') -> list:
         """
         Set language keys
         """
         if self.codes:
             return self.codes
 
-        file = open(f'{os.path.join(os.path.dirname(os.getcwd()), source)}')
+        path = os.path.abspath(os.path.dirname(__file__))
+        file = open(f'{os.path.join(path, source)}')
         objects = json.load(file)
 
         for element in objects:
