@@ -6,7 +6,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 
 setup(
     name="drf-localize",
-    version="0.1.3",
+    version="0.1.4",
     author="Dorin Musteața",
     description="Package to provide localization experiences for mobile and api applications.",
     long_description=README,
